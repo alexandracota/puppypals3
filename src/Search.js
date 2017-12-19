@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import Header from './Header';
 
 const style = {
 	paddingTop: '20px'
@@ -11,6 +12,8 @@ export default class Example extends React.Component {
 
   render() {
     return (
+      <div>
+      <Header />
       <Form className="container col-10" style={style}>
       	<p>Search & Rescue your next furry friend!</p>
       	  <FormGroup>
@@ -24,6 +27,7 @@ export default class Example extends React.Component {
         <Button>Submit</Button>
         <p>Powered by Petfinder.</p>
       </Form>
+      </div>
     );
   }
 }
