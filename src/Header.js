@@ -1,7 +1,7 @@
 import React from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router';
-import { login, logout, isLoggedIn } from '../utils/AuthService';
+import { login, logout, isLoggedIn } from './utils/AuthService';
 
 export default class Header extends React.Component {
   constructor(props) {
