@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const jwks = require('jwks-rsa');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const FaveDog = require('./model/FaveDogs');
 
 const app = express();
 const router = express.Router();
@@ -55,18 +56,22 @@ app.get('/api/dogs', (req, res) => {
   let dogs = [
   {
     id: 1,
+    zipcode: 94133,
     breed: 'chocolate dachshund'
   },
   {
     id: 2,
+    zipcode: 94133,
     breed: 'black dachshund'
   },
   {
     id: 3,
+    zipcode: 94133,
     breed: 'long-haired dachshund'
   },
   {
     id: 4,
+    zipcode: 94133,
     breed: 'miniature dachshund'
   }
   ]
