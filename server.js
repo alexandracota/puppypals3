@@ -1,15 +1,41 @@
 'use strict';
 
 const express = require('express');
-const app = express();
 const jwt = require('express-jwt');
+const mongoose = require('mongoose');
 const jwks = require('jwks-rsa');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const app = express();
+const router = express.Router();
+
+const PORT = process.env.API_PORT || 3001;
+
+//db config
+mongoose.connect('mongodb://heroku_tj3gfjnk:el4af3ucjhqd5db9e2al1rhjmm@ds161016.mlab.com:61016/heroku_tj3gfjnk');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+// app.use(cors());
+
+//To prevent errors from Cross Origin Resource Sharing, 
+//Set headers to allow CORS with middleware
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS, POST, PUT, DELETE');
+  res.setHeader('Acccess-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
+  //remove cacheing to get the most recent information.
+  res.setHeader('Cache-Control', 'no-cache');
+  next();
+})
+
+router.get('/', function(req, res) {
+  res.json({ message: 'API initialized!'});
+});
+
+app.use('/api', router);
 
 const authCheck = jwt({
   secret: jwks.expressJwtSecret({
@@ -47,5 +73,6 @@ app.get('/api/dogs', (req, res) => {
   res.json(dogs);
 })
 
-app.listen(3333);
-console.log('Listening on localhost:3333');
+app.listen(PORT, function () {
+  console.log(`Listening on localhost: ${PORT}`);
+});

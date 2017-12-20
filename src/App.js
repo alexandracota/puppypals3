@@ -2,7 +2,7 @@ import React from 'react';
 import Search from './Search';
 import Callback from './Callback';
 import { Route, HashRouter } from 'react-router-dom';
-import { requireAuth } from './utils/AuthService';
+// import { requireAuth } from './utils/AuthService';
 
 export default class App extends React.Component {
   render() {
